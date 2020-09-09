@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .all {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-flow: column;
+            justify-content: center;
+            align-items: center;
+        }
+        #logout {
+            position: relative;
+            text-transform: uppercase;
+            padding: 8px 13px;
+            color: #ECFFFB;
+            background-color: #FF5959;
+            cursor: pointer;
+            margin-top: 30px;
+            border: transparent;
+            border-radius: 5px;
+        }
+        span {
+            color: #0095ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="all">
+        <h1>Welcome to the homepage!</h1>
+        <div>
+            <p>Email: <span><%= user.email %></span></p>
+            <p>Name: <span><%= user.name %></span></p>
+        </div>
+        <form action="/auth/logout" method="post">
+            <button type="submit" id="logout">Logout</button>
+        </form>
+        <form action="/addtime" method="post">
+            <button type="submit" id="logout">Add time</button>
+        </form>
+    </div>
+</body>
+</html>
