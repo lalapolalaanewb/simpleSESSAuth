@@ -21,6 +21,16 @@ router.get('/', redirectLogin, async(req, res) => {
 
         // render Home page
         return res.render('home', { user: data })
+        // return res.send(`
+        //     <h1>Welcome to homepage!</h1>
+        //     <div>
+        //         <p>Email: ${data.email}</p>
+        //         <p>Email: ${data.name}</p>
+        //     </div>
+        //     <form action='/auth/logout' method='POST'>
+        //         <button type="submit">Logout</button>
+        //     </form>
+        // `)
     }).catch(err => res.json({ message: err }))    
 })
 

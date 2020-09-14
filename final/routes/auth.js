@@ -13,6 +13,12 @@ const { redirectLogin, redirectHome} = require('../controllers/verifications')
 const { logIn, logOut } = require('../config/index')
 
 /* Routes */
+// REGISTER Get Router
+router.get('/register', redirectHome, (req, res) => {
+    // render Register page
+    res.render('auth/register', { message: '' })
+})
+
 // REGISTER Post Router
 router.post('/register', redirectHome, async(req, res) => {
     let {
@@ -20,6 +26,8 @@ router.post('/register', redirectHome, async(req, res) => {
         email,
         // user's password
         password,
+        // user's passwordConfirm
+        passwordConfirm,
         // user's firstName
         firstName,
         // user's lastName
@@ -28,12 +36,14 @@ router.post('/register', redirectHome, async(req, res) => {
 
     // 1. do validation
     const { error } = registerValidation(req.body)
-    if(error) return res.json({ message: error.details[0].message })
+    // if(error) return res.json({ message: error.details[0].message })
+    if(error) return res.render('auth/register', { message: error.details[0].message })
     
     // 2. check email existance
     const emailExist = await All.findOne({ 'credentials.email': email })
     // - if exist, then throw error
-    if(emailExist) return res.json({ message: 'Email already exist!' })
+    // if(emailExist) return res.json({ message: 'Email already exist!' })
+    if(emailExist) return res.render('auth/register', { message: 'Email already exist!' })
     
     // 3. hash password
     const salt = await bcrypt.genSalt(10)
@@ -56,9 +66,11 @@ router.post('/register', redirectHome, async(req, res) => {
     // 5. save new user
     try {
         const saveNewUser = await user.save()
-        res.json({ message: "User successfully saved!" })
+        // res.json({ message: "User successfully saved!" })
+        res.render('auth/register', { message: 'Your account successfully created! You can start login now.' })
     } catch(err) {
-        res.json({ message: "Unsuccessfully save new user!" })
+        // res.json({ message: "Unsuccessfully save new user!" })
+        res.render('auth/register', { message: 'Unsuccessfully save new user! Please try again later.' })
     }
 })
 
@@ -66,6 +78,15 @@ router.post('/register', redirectHome, async(req, res) => {
 router.get('/', redirectHome, async(req, res) => {
     // render Login page
     res.render('auth/login', { message: '' })
+    // res.send(`
+    //     <h2>Login Page</h2>
+    //     <p>Insert your credential below:-</p>
+    //     <form action='/auth' method='POST'>
+    //         <input type="email" name="email" placeholder="Username" required>
+    //         <input type="password" name="password" placeholder="Password" required>
+    //         <button type="submit">Login</button>
+    //     </form>
+    // `)
 })
 
 // LOGIN Post Router

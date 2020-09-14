@@ -16,10 +16,10 @@
         .heading2 {
             padding: 0;
             margin: 0;
-            color: #0077cc;
+            color:  #FF5959;
         }
         span {
-            color: #0095ff;
+            color: #ff8b8b;
         }
         p {
             position: relative;
@@ -32,7 +32,7 @@
             align-items: center;
             margin-top: 30px;
         }
-        .login {
+        .register {
             position: relative;
             color: white;
             font-weight: 600;
@@ -40,27 +40,27 @@
             padding: 5px 12px;
             border: transparent;
             border-radius: 5px;
-            background-color: #0077cc;
+            background-color: #FF5959;
             transition: all 0.5s ease-in-out;
         }
-        .login:hover {
+        .register:hover {
             cursor: pointer;
-            background-color: #0095ff;
+            background-color: #ff8b8b;
             transition: all 0.5s ease-in-out;
         }
-        .register {
+        .login {
             position: relative;
-            color: #FF5959;
-            border: #FF5959 1px solid;
+            color: #0077cc;
+            border: #0077cc 1px solid;
             padding: 3px 12px;
             transition: all 0.5s ease-in-out;
             border-radius: 5px;
             text-decoration: none;
         }
-        .register:hover {
+        .login:hover {
             cursor: pointer;
-            color: #ff8b8b;
-            border-color: #ff8b8b;
+            color: #0095ff;
+            border-color: #0095ff;
             transition: all 0.5s ease-in-out;
         }
         .error {
@@ -90,22 +90,27 @@
 </head>
 <body>
     <div class="all">
-        <h2 class="heading2">LOGIN <span>PAGE</span></h2>
+        <h2 class="heading2">REGISTER <span>PAGE</span></h2>
         <p>Insert your credentials below:-</p>
-        <form action="/auth" method="post" class="form">
+        <form action="/auth/register" method="post" class="form">
             <% if(message !== '') { %>
                 <div class="error">
                     <p class="message"><%= message %></p>
                     <p class="close" id="close">X</p>
                 </div>
             <% } %>
-            <div>
-                <input type="email" name="email" placeholder="Username" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <div style="margin-top:15px">
                 <input type="password" name="password" placeholder="Password" required>
+                <input type="password" name="passwordConfirm" placeholder="Re-type Password" required>
+            </div>
+            <div style="margin-top:15px">
+                <input type="text" name="firstName" placeholder="Firstname" required>
+                <input type="text" name="lastName" placeholder="Lastname" required>
             </div>
             <div>
-                <button class="login" type="submit">Login</button>
-                <a href="/auth/register" class="register">Register</a>
+                <button class="register" type="submit">Register</button>
+                <a href="/auth" class="login">Login</a>
             </div>
         </form>
     </div>

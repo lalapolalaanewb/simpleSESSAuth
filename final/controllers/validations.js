@@ -20,6 +20,13 @@ const registerValidation = data => {
         passwordConfirm: joi
             .valid(joi.ref('password'))
             .required(),
+            // .messages({
+            //     'string.base': `"Password Confirmation" should be a type of 'text'`,
+            //     'string.empty': `"Password Confirmation" cannot be an empty field`,
+            //     'string.min': `"Password Confirmation" should have a minimum length of {#limit}`,
+            //     'any.ref': `"Password Confirmation" should be the same as Password entered before`,
+            //     'any.required': `"Password Confirmation" is a required field`
+            //   }),
         firstName: joi
             .string()
             .min(4)
